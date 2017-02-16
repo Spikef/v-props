@@ -1,6 +1,6 @@
 {
   "name": "v-props",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue directive for inheriting all defined props from parent component.",
   "main": "index.js",
   "repository": {

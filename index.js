@@ -11,7 +11,7 @@ module.exports = function(Vue) {
             var childKeys = childProps ? Object.keys(childProps) : [];
 
             function update(vm, key, value) {
-                var options = vm._props[key].options;
+                let options = vm._props[key].options;
 
                 if (options.type) {
                     var allow = false;
@@ -20,8 +20,7 @@ module.exports = function(Vue) {
 
                     if (!Array.isArray(typeList)) typeList = [typeList];
 
-                    for (var i=0;i<typeList.length;i++) {
-                        var item = typeList[i];
+                    for (let item of typeList) {
                         if (item === constructor) {
                             allow = true;
                             break;
@@ -29,7 +28,7 @@ module.exports = function(Vue) {
                     }
 
                     if (!allow) {
-                        console.warn('Invalid property type: ' + key + '.');
+                        console.warn(`Invalid property type: ${key}.`);
                         return;
                     }
                 }
@@ -41,18 +40,18 @@ module.exports = function(Vue) {
                 vm[key] = value;
             }
 
-            theseKeys.forEach(function(key) {
+            theseKeys.forEach(key => {
                 if (~childKeys.indexOf(key)) {
                     update(child, key, these[key]);
 
                     if (!modifiers.once) {
-                        these.$watch(function(key, value) {
+                        these.$watch(key, value => {
                             update(child, key, value);
                         });
                     }
 
                     if (modifiers.sync) {
-                        child.$watch(function(key, value) {
+                        child.$watch(key, value => {
                             update(these, key, value);
                         });
                     }
