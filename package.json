@@ -1,0 +1,17 @@
+{
+  "name": "v-props",
+  "version": "1.0.0",
+  "description": "Vue directive for inheriting all defined props from parent component.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Spikef/v-props"
+  },
+  "keywords": [
+    "vue",
+    "vue-props",
+    "directive"
+  ],
+  "author": "Spikef",
+  "license": "MIT"
+}
