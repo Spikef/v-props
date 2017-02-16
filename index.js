@@ -30,7 +30,7 @@
                         }
 
                         if (!allow) {
-                            console.warn(`Invalid property type: ${key}.`);
+                            console.warn('Invalid property type: ' + key + '.');
                             return;
                         }
                     }
