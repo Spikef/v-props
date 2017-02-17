@@ -14,24 +14,28 @@
                 function update(vm, key, value) {
                     var options = vm._props[key].options;
 
-                    if (options.type && value !== undefined) {
-                        var allow = false;
-                        var constructor = value.constructor;
-                        var typeList = options.type;
+                    if (options.type) {
+                        if (value === undefined || value === null) {
+                            value = new options.type();
+                        } else {
+                            var allow = false;
+                            var constructor = value.constructor;
+                            var typeList = options.type;
 
-                        if (!Array.isArray(typeList)) typeList = [typeList];
+                            if (!Array.isArray(typeList)) typeList = [typeList];
 
-                        for (var i=0;i<typeList.length;i++) {
-                            var item = typeList[i];
-                            if (item === constructor) {
-                                allow = true;
-                                break;
+                            for (var i=0;i<typeList.length;i++) {
+                                var item = typeList[i];
+                                if (item === constructor || value instanceof item) {
+                                    allow = true;
+                                    break;
+                                }
                             }
-                        }
 
-                        if (!allow) {
-                            console.warn('Invalid property type: ' + key + '.');
-                            return;
+                            if (!allow) {
+                                console.warn('Invalid property type: ' + key + '.');
+                                return;
+                            }
                         }
                     }
 
